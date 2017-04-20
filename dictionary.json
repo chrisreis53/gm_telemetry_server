@@ -1,0 +1,516 @@
+{
+    "name": "Example Spacecraft",
+    "identifier": "sc",
+    "subsystems": [
+        {
+            "name": "Vehicle",
+            "identifier": "v",
+            "measurements": [
+                {
+                    "name": "Altitude",
+                    "identifier": "V.ALTITUDE",
+                    "units": "meters",
+                    "type": "float"
+                },
+                {
+                    "name": "Height From Terrain",
+                    "identifier": "V.HEIGHTFROMTERRAIN",
+                    "units": "meters",
+                    "type": "float"
+                },
+                {
+                    "name": "Terrain Height",
+                    "identifier": "V.TERRAINHEIGHT",
+                    "units": "meters",
+                    "type": "float"
+                },
+                {
+                    "name": "Mission Time",
+                    "identifier": "V.MISSIONTIME",
+                    "units": "seconds",
+                    "type": "float"
+                },
+                {
+                    "name": "Surface Velocity",
+                    "identifier": "V.SURFACEVELOCITY",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Surface Velocity X",
+                    "identifier": "V.SURFACEVELOCITYX",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Surface Velocity Y",
+                    "identifier": "V.SURFACEVELOCITYY",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Surface Velocity Z",
+                    "identifier": "V.SURFACEVELOCITYZ",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Angular Velocity",
+                    "identifier": "V.ANGULARVELOCITY",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Orbital Velocity",
+                    "identifier": "V.ORBITALVELOCITY",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Surface Speed",
+                    "identifier": "V.SURFACESPEED",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Vertical Speed",
+                    "identifier": "V.VERTICALSPEED",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "G-Force",
+                    "identifier": "V.GEEFORCE",
+                    "units": "gravity",
+                    "type": "float"
+                },
+                {
+                    "name": "Atmospheric Density",
+                    "identifier": "V.ATMOSPHERICDENSITY",
+                    "units": "kPa",
+                    "type": "float"
+                },
+                {
+                    "name": "Longitude",
+                    "identifier": "V.LONG",
+                    "units": "degree",
+                    "type": "float"
+                },
+                {
+                    "name": "Latitude",
+                    "identifier": "V.LAT",
+                    "units": "degree",
+                    "type": "float"
+                },
+                {
+                    "name": "Dynamic Pressure",
+                    "identifier": "V.DYNAMICPRESSURE",
+                    "units": "kPa",
+                    "type": "float"
+                },
+                {
+                    "name": "Name",
+                    "identifier": "V.NAME",
+                    "units": "string",
+                    "type": "string"
+                },
+                {
+                    "name": "Angle to Prograde",
+                    "identifier": "V.ANGLETOPROGRADE",
+                    "units": "degree",
+                    "type": "float"
+                }
+            ]
+        },
+        {
+            "name": "Orbit",
+            "identifier": "o",
+            "measurements": [
+                {
+                    "name": "Relative Velocity",
+                    "identifier": "O.RELATIVEVELOCITY",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Periapsis",
+                    "identifier": "O.PEA",
+                    "units": "meters",
+                    "type": "float"
+                },
+                {
+                    "name": "Apoapsis",
+                    "identifier": "O.APA",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Time to Apoapsis",
+                    "identifier": "O.TIMETOAP",
+                    "units": "seconds",
+                    "type": "float"
+                },
+                {
+                    "name": "Time to Periapsis",
+                    "identifier": "O.TIMETOPE",
+                    "units": "seconds",
+                    "type": "float"
+                },
+                {
+                    "name": "Inclination",
+                    "identifier": "O.INCLINATION",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Eccentricity",
+                    "identifier": "O.ECCENTRICITY",
+                    "units": "none",
+                    "type": "float"
+                },
+                {
+                    "name": "Epoch",
+                    "identifier": "O.EPOCH",
+                    "units": "seconds",
+                    "type": "float"
+                },
+                {
+                    "name": "Period",
+                    "identifier": "O.PERIOD",
+                    "units": "none",
+                    "type": "float"
+                },
+                {
+                    "name": "Argument of Periapsis",
+                    "identifier": "O.ARGUMENTOFPARIAPSIS",
+                    "units": "degree",
+                    "type": "float"
+                },
+                {
+                    "name": "Semimajor Axis",
+                    "identifier": "O.SMA",
+                    "units": "degree",
+                    "type": "float"
+                },
+                {
+                    "name": "Longitude of Ascending Node",
+                    "identifier": "O.LAN",
+                    "units": "degree",
+                    "type": "float"
+                },
+                {
+                    "name": "Mean Anomaly at Epoch",
+                    "identifier": "O.MAAE",
+                    "units": "none",
+                    "type": "float"
+                },
+                {
+                    "name": "Time of Periapsis Passage",
+                    "identifier": "O.TIMEOFPARIAPSISPASSAGE",
+                    "units": "seconds",
+                    "type": "float"
+                },
+                {
+                    "name": "True Anomaly",
+                    "identifier": "O.TRUEANOMALY",
+                    "units": "none",
+                    "type": "float"
+                }
+            ]
+        },
+        {
+            "name": "Navigation",
+            "identifier": "n",
+            "measurements": [
+                {
+                    "name": "Heading",
+                    "identifier": "N.HEADING2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Pitch",
+                    "identifier": "N.PITCH2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Roll",
+                    "identifier": "N.ROLL2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Raw Heading",
+                    "identifier": "N.RAWHEADING2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Raw Pitch",
+                    "identifier": "N.RAWPITCH2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Raw Roll",
+                    "identifier": "N.RAWROLL2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Heading",
+                    "identifier": "N.HEADING",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Pitch",
+                    "identifier": "N.PITCH",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Roll",
+                    "identifier": "N.ROLL",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Raw Heading",
+                    "identifier": "N.RAWHEADING",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Raw Pitch",
+                    "identifier": "N.RAWPITCH",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Raw Roll",
+                    "identifier": "N.RAWROLL",
+                    "units": "degrees",
+                    "type": "float"
+                }
+            ]
+        },
+        {
+            "name": "Docking",
+            "identifier": "dock",
+            "measurements": [
+                {
+                    "name": "Docking x Angle",
+                    "identifier": "DOCK.AX",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Docking y Angle",
+                    "identifier": "DOCK.AY",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Docking z Angle",
+                    "identifier": "DOCK.AZ",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Docking x Distance",
+                    "identifier": "DOCK.X",
+                    "units": "meters",
+                    "type": "float"
+                },
+                {
+                    "name": "Docking y Distance",
+                    "identifier": "DOCK.Y",
+                    "units": "meters",
+                    "type": "float"
+                }
+            ]
+        },
+        {
+            "name": "Power",
+            "identifier": "pwr",
+            "measurements": [
+                {
+                    "name": "Generator Temperature",
+                    "identifier": "pwr.temp",
+                    "units": "\u0080C",
+                    "type": "float"
+                },
+                {
+                    "name": "Generator Current",
+                    "identifier": "pwr.c",
+                    "units": "A",
+                    "type": "float"
+                },
+                {
+                    "name": "Generator Voltage",
+                    "identifier": "pwr.v",
+                    "units": "V",
+                    "type": "float"
+                }
+            ]
+        },
+        {
+            "name": "UBUNTUDEV System Information",
+            "identifier": "sys",
+            "measurements": [
+                {
+                    "name": "System Uptime",
+                    "identifier": "sys.uptime",
+                    "units": "s",
+                    "type": "float"
+                },
+                {
+                    "name": "Processor Percent",
+                    "identifier": "sys.proc_percent",
+                    "units": "%",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Used",
+                    "identifier": "sys.memused",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "System Idle",
+                    "identifier": "sys.idle",
+                    "units": "%",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Free",
+                    "identifier": "sys.memfree",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Total",
+                    "identifier": "sys.memtotal",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Active",
+                    "identifier": "sys.memactive",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Available",
+                    "identifier": "sys.memavailable",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Received Bytes",
+                    "identifier": "sys.rxbytes",
+                    "units": "Bytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Received Packets",
+                    "identifier": "sys.rxpackets",
+                    "units": "Bytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Transmitted Bytes",
+                    "identifier": "sys.txbytes",
+                    "units": "Bytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Transmitted Packets",
+                    "identifier": "sys.txpackets",
+                    "units": "Bytes",
+                    "type": "float"
+                }
+            ]
+        },
+        {
+            "name": "OTHER System Information",
+            "identifier": "sys1",
+            "measurements": [
+                {
+                    "name": "System Uptime",
+                    "identifier": "sys1.uptime",
+                    "units": "s",
+                    "type": "float"
+                },
+                {
+                    "name": "Processor Percent",
+                    "identifier": "sys1.proc_percent",
+                    "units": "%",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Used",
+                    "identifier": "sys1.memused",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "System Idle",
+                    "identifier": "sys1.idle",
+                    "units": "%",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Free",
+                    "identifier": "sys1.memfree",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Total",
+                    "identifier": "sys1.memtotal",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Active",
+                    "identifier": "sys1.memactive",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Available",
+                    "identifier": "sys1.memavailable",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Received Bytes",
+                    "identifier": "sys1.rxbytes",
+                    "units": "Bytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Received Packets",
+                    "identifier": "sys1.rxpackets",
+                    "units": "Bytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Transmitted Bytes",
+                    "identifier": "sys1.txbytes",
+                    "units": "Bytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Transmitted Packets",
+                    "identifier": "sys1.txpackets",
+                    "units": "Bytes",
+                    "type": "float"
+                }
+            ]
+        }
+    ]
+}
