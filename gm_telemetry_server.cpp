@@ -337,7 +337,7 @@ class telemetry_server {
 			void update_msg_queue(){
 				for(std::vector<std::string>::iterator it = topics.begin();it != topics.end();it++){
 					measurement meas =  systemdata.getMeasurement(*it);
-					std::cout << "FOUND:  " << meas.name << '\n';
+					//std::cout << "FOUND:  " << meas.name << '\n';
 					jtopics.push_back(json_pack(meas.name,meas.timestamp,meas.v));
 				}
 			}
@@ -465,7 +465,8 @@ int main(int argc, char* argv[])
 	gmsub g = gmsub(config);
 
 	//load dictionary
-	dictionary = load_dictionary();
+	std::string filename = example::get(config, "dictionary", "/GMSEC_API/bin/dictionary.json");
+	dictionary = load_dictionary(filename);
 
 	//Threads
 	std::thread gmsec(&gmsub::run,&g);

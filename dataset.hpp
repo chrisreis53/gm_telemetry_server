@@ -64,7 +64,7 @@ struct subsystem {
   measurement getMeasurement(std::string m){
     measurement ret;
     for(std::vector<measurement>::iterator it = v.begin();it != v.end();++it){
-      std::cout << "Searching...." << it->name << m << '\n';
+      //std::cout << "Searching...." << it->name << m << '\n';
       if(it->name==m){
         ret.name = it->name;
         ret.v = it->v;
@@ -85,8 +85,8 @@ struct subsystem {
   }
 };
 
-std::string load_dictionary(){
-	std::string filename = "dictionary.json";
+std::string load_dictionary(std::string input){
+	std::string filename = input;
 	std::ifstream file;
 	file.open(filename.c_str(), std::ios::in);
 	if(!file){
