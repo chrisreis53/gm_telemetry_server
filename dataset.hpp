@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <chrono>
+#include <mysql/mysql.h>
 
 #include <boost/any.hpp>
 
@@ -35,12 +36,17 @@ struct measurement {
 struct subsystem {
   std::string name;
 	std::vector<measurement> v;
+  MYSQL *con=mysql_init(NULL);
+  MYSQL_RES *res;
 
   void updateMeasurement(std::string m, std::string value, unsigned long t){
+    mysql_real_connect(con,"192.168.1.4","root","root","gmsec",0,NULL,0);
     for(std::vector<measurement>::iterator it = v.begin();it != v.end();++it){
       if(it->name==m){
         it->v = value;
         it->timestamp = t;
+        std::string insert = "INSERT INTO " + m + " VALUES(" + value + "," + std::to_string(t) +");";
+        mysql_query(con,insert.c_str());
         return;
       }
     }
@@ -49,6 +55,26 @@ struct subsystem {
     meas.v = value;
     meas.timestamp = t;
     v.push_back(meas);
+    //mysql_query
+    std::string str = "CREATE TABLE "+m+"(Timestamp TEXT, Value TEXT);";
+    std::cout << str << '\n';
+    mysql_query(con,str.c_str());
+    std::cout << mysql_error(con) << '\n';
+    str = "INSERT INTO " + m + " VALUES(" + value + "," + std::to_string(t) +");";
+    mysql_query(con,str.c_str());
+    std::cout << mysql_error(con) << '\n';
+    return;
+  }
+
+  void connectToDB(std::string s,std::string prefix){
+    std::cout << "Connecting to server " << s << " version: " << mysql_get_client_info() << '\n';
+    mysql_real_connect(con,s.c_str(),"root","root","gmsec",0,NULL,0);
+    std::string test = "CREATE TABLE "+ prefix +"(Timestamp TEXT, Value TEXT);";
+    mysql_query(con,test.c_str());
+    test = "INSERT INTO " + prefix +" VALUES(2000,9999);";
+    mysql_query(con,test.c_str());
+    mysql_free_result(res);
+    mysql_close(con);
     return;
   }
 

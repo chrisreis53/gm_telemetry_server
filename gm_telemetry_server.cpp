@@ -61,6 +61,7 @@ std::mutex systemdata_mutex;
 std::vector<std::time_t> time_vector;
 std::mutex sys_mutex;
 nlohmann::json j;
+std::string SQL_Server;
 
 class gmsub
 {
@@ -467,6 +468,12 @@ int main(int argc, char* argv[])
 	//load dictionary
 	std::string filename = example::get(config, "dictionary", "/GMSEC_API/bin/dictionary.json");
 	dictionary = load_dictionary(filename);
+	port = example::get(config, "port", 8081);
+	//set sql server
+	SQL_Server = example::get(config, "SQL_Server", "192.168.1.4");
+	nav_sys.connectToDB(SQL_Server,"N");
+	orb_sys.connectToDB(SQL_Server,"O");
+	veh_sys.connectToDB(SQL_Server,"V");
 
 	//Threads
 	std::thread gmsec(&gmsub::run,&g);

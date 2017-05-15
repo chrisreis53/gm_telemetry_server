@@ -10,8 +10,8 @@ TARGET = gm_telemetry_server
 
 include ../AppMake.mf
 
-INCS += -I ./websocketpp
+INCS += -I ./websocketpp -I/user/include/mysql
 
-LDFLAGS += -lboost_system
+LDFLAGS += -lboost_system -lmysqlclient -lz
 
 CXXFLAGS += -std=c++11
