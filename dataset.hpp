@@ -34,6 +34,7 @@ struct measurement {
 };
 
 struct subsystem {
+  std::string server;
   std::string name;
 	std::vector<measurement> v;
   MYSQL *con=mysql_init(NULL);
@@ -45,7 +46,7 @@ struct subsystem {
       if(it->name==m){
         it->v = value;
         it->timestamp = t;
-        std::string insert = "INSERT INTO " + m + " VALUES(" + value + "," + std::to_string(t) +");";
+        std::string insert = "INSERT INTO " + m + " VALUES(" + std::to_string(t) + "," + value +");";
         mysql_query(con,insert.c_str());
         return;
       }
@@ -60,13 +61,37 @@ struct subsystem {
     std::cout << str << '\n';
     mysql_query(con,str.c_str());
     std::cout << mysql_error(con) << '\n';
-    str = "INSERT INTO " + m + " VALUES(" + value + "," + std::to_string(t) +");";
+    str = "INSERT INTO " + m + " VALUES(" + std::to_string(t) + "," + value +");";
     mysql_query(con,str.c_str());
     std::cout << mysql_error(con) << '\n';
     return;
   }
 
+  nlohmann::json getHistory(std::string his){
+    nlohmann::json json_re;
+    nlohmann::json json_val;
+    for(std::vector<measurement>::iterator it = v.begin();it != v.end();++it){
+      if(it->name==his){
+        MYSQL *c=mysql_init(NULL);
+        mysql_real_connect(c,server.c_str(),"root","root","gmsec",0,NULL,0);
+        std::string q = "SELECT * FROM " + his;
+        mysql_query(c,q.c_str());
+        MYSQL_RES *r = mysql_store_result(c);
+        int num_fields = mysql_num_fields(r);
+        MYSQL_ROW *row;
+        while(row=mysql_fetch_row(result)){
+          json_val["timestamp"]=row[0];
+          json_val["value"]=row[1];
+          json_re["value"] += json_val;
+        }
+        std::cout << json_re.dump() << '\n';
+      }
+    }
+    return json_re;
+  }
+
   void connectToDB(std::string s,std::string prefix){
+    server = s;
     std::cout << "Connecting to server " << s << " version: " << mysql_get_client_info() << '\n';
     mysql_real_connect(con,s.c_str(),"root","root","gmsec",0,NULL,0);
     std::string test = "CREATE TABLE "+ prefix +"(Timestamp TEXT, Value TEXT);";
