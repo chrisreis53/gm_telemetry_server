@@ -1,3 +1,4 @@
+
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
@@ -15,7 +16,6 @@ using namespace gmsec::api::util;
 
 
 std::vector<std::string> telemetry_available;
-
 // struct measurement {
 //   std::string name;
 // 	std::vector<boost::any> v;
@@ -37,10 +37,9 @@ struct subsystem {
   std::string server;
   std::string name;
 	std::vector<measurement> v;
-  MYSQL *con=mysql_init(NULL);
-  MYSQL_RES *res;
 
   void updateMeasurement(std::string m, std::string value, unsigned long t){
+    MYSQL *con=mysql_init(NULL);
     mysql_real_connect(con,"192.168.1.4","root","root","gmsec",0,NULL,0);
     for(std::vector<measurement>::iterator it = v.begin();it != v.end();++it){
       if(it->name==m){
@@ -48,6 +47,8 @@ struct subsystem {
         it->timestamp = t;
         std::string insert = "INSERT INTO " + m + " VALUES(" + std::to_string(t) + "," + value +");";
         mysql_query(con,insert.c_str());
+        //std::cout << mysql_error(con) << '\n';
+        mysql_close(con);
         return;
       }
     }
@@ -58,47 +59,51 @@ struct subsystem {
     v.push_back(meas);
     //mysql_query
     std::string str = "CREATE TABLE "+m+"(Timestamp TEXT, Value TEXT);";
-    std::cout << str << '\n';
     mysql_query(con,str.c_str());
-    std::cout << mysql_error(con) << '\n';
+    //std::cout << mysql_error(con) << '\n';
     str = "INSERT INTO " + m + " VALUES(" + std::to_string(t) + "," + value +");";
     mysql_query(con,str.c_str());
-    std::cout << mysql_error(con) << '\n';
+    //std::cout << mysql_error(con) << '\n';
+    mysql_close(con);
     return;
   }
 
   nlohmann::json getHistory(std::string his){
+    std::cout << "Getting History of " << his << v.size() <<'\n';
     nlohmann::json json_re;
     nlohmann::json json_val;
     for(std::vector<measurement>::iterator it = v.begin();it != v.end();++it){
       if(it->name==his){
         MYSQL *c=mysql_init(NULL);
         mysql_real_connect(c,server.c_str(),"root","root","gmsec",0,NULL,0);
+        std::cout << mysql_error(c) << '\n';
         std::string q = "SELECT * FROM " + his;
         mysql_query(c,q.c_str());
+        std::cout << mysql_error(c) << '\n';
         MYSQL_RES *r = mysql_store_result(c);
-        int num_fields = mysql_num_fields(r);
-        MYSQL_ROW *row;
-        while(row=mysql_fetch_row(result)){
+        //int num_fields = mysql_num_fields(r);
+        MYSQL_ROW row;
+        while((row=mysql_fetch_row(r))){
           json_val["timestamp"]=row[0];
           json_val["value"]=row[1];
           json_re["value"] += json_val;
         }
-        std::cout << json_re.dump() << '\n';
+        mysql_close(c);
       }
     }
     return json_re;
   }
 
   void connectToDB(std::string s,std::string prefix){
+    MYSQL *con=mysql_init(NULL);
     server = s;
     std::cout << "Connecting to server " << s << " version: " << mysql_get_client_info() << '\n';
     mysql_real_connect(con,s.c_str(),"root","root","gmsec",0,NULL,0);
     std::string test = "CREATE TABLE "+ prefix +"(Timestamp TEXT, Value TEXT);";
+    std::cout << test << '\n';
     mysql_query(con,test.c_str());
     test = "INSERT INTO " + prefix +" VALUES(2000,9999);";
     mysql_query(con,test.c_str());
-    mysql_free_result(res);
     mysql_close(con);
     return;
   }

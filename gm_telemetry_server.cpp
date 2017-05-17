@@ -347,6 +347,9 @@ class telemetry_server {
 				//remove whitespace
 				val.erase(remove_if(val.begin(),val.end(),isspace),val.end());
 				nlohmann::json re;
+				re["type"] = "history";
+				re["id"] = val;
+				re["value"] = systemdata.getHistory(val);
 				return re;
 			}
 
@@ -471,15 +474,12 @@ int main(int argc, char* argv[])
 	port = example::get(config, "port", 8081);
 	//set sql server
 	SQL_Server = example::get(config, "SQL_Server", "192.168.1.4");
-	nav_sys.connectToDB(SQL_Server,"N");
-	orb_sys.connectToDB(SQL_Server,"O");
-	veh_sys.connectToDB(SQL_Server,"V");
+	systemdata.connectToDB(SQL_Server, "Kerbal");
 
 	//Threads
 	std::thread gmsec(&gmsub::run,&g);
 	std::this_thread::sleep_for(std::chrono::seconds(5));
 	std::thread websocket(&telemetry_server::run,&s,docroot, port);
-
 
 	int counter= 0;
 	while(true){
