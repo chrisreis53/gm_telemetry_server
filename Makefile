@@ -5,7 +5,7 @@
 
 
 
-SRCS   = gm_telemetry_server.cpp
+SRCS   = gm_telemetry_server.cpp dataset.hpp
 TARGET = gm_telemetry_server
 
 include ../AppMake.mf
