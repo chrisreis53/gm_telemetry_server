@@ -84,9 +84,9 @@ struct subsystem {
         //int num_fields = mysql_num_fields(r);
         MYSQL_ROW row;
         while((row=mysql_fetch_row(r))){
-          json_val["timestamp"]=row[0];
+          json_val["timestamp"]=std::stol(row[0]);
           json_val["value"]=row[1];
-          json_re["value"] += json_val;
+          json_re.push_back(json_val);
         }
         mysql_close(c);
       }

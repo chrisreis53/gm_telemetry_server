@@ -347,8 +347,8 @@ class telemetry_server {
 				//remove whitespace
 				val.erase(remove_if(val.begin(),val.end(),isspace),val.end());
 				nlohmann::json re;
-				re["type"] = "history";
 				re["id"] = val;
+				re["type"] = "history";
 				re["value"] = systemdata.getHistory(val);
 				return re;
 			}
